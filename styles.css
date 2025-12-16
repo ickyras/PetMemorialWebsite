@@ -1,198 +1,33 @@
-/* --- UNIVERSAL STYLES --- */
-body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 0;
-    padding: 0;
-    color: #444;
-    background-color: #f4f4f4;
-}
-
-main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-h1, h2 {
-    color: #6a5340;
-}
-
-p {
-    line-height: 1.6;
-}
-
-/* --- HEADER & NAVIGATION --- */
-header {
-    background-color: #a87f5e;
-    color: white;
-    padding: 15px 0;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    color: white;
-    font-size: 2.5em;
-    font-weight: 300;
-}
-
-nav {
-    margin-top: 10px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-nav a:hover {
-    background-color: #6a5340;
-}
-
-/* --- HOMEPAGE SLIDESHOW STYLES --- */
+/* --- HOMEPAGE ROTATOR STYLES --- */
 #slideshow-container {
-    height: 400px;
-    position: relative;
+    height: 500px; /* Adjust this to your preferred height */
+    position: relative; /* This is the "anchor" for the stacked photos */
     overflow: hidden;
-    margin-bottom: 20px;
+    background-color: #6a5340; /* Memorial brown background */
+    border-radius: 8px;
+    margin-bottom: 30px;
 }
 
 .slideshow-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
-    position: absolute;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    background-color: #6a5340;
+    object-fit: contain; /* Shows the whole photo without cropping */
+    position: absolute; /* Stacks all photos on top of each other */
+    top: 0;
+    left: 0;
+    opacity: 0; /* Hide by default */
+    transition: opacity 1.5s ease-in-out; /* The fading effect */
 }
 
+/* This is what the JavaScript "turns on" to show a photo */
 .slideshow-image.active {
     opacity: 1;
 }
 
-/* --- GALLERY PAGE STYLES --- */
-.gallery-intro {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
+/* Grid layout for the Gallery (re-confirming this is here) */
 .photo-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px; 
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.gallery-thumb {
-    width: 100%;
-    height: 150px;
-    object-fit: contain; 
-    background-color: #f0f0f0;
-    cursor: pointer; 
-    border-radius: 4px;
-    transition: transform 0.3s;
-}
-
-.gallery-thumb:hover {
-    transform: scale(1.03); 
-    box-shadow: 0 0 10px rgba(168, 127, 94, 0.5);
-}
-
-/* --- LIGHTBOX OVERLAY --- */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    /* Centers the content */
-    align-items: center;
-    justify-content: center;
-}
-
-#lightbox-img {
-    display: block;
-    margin: auto;
-    margin-top: 5vh;
-    max-width: 85%;
-    max-height: 85vh;
-    object-fit: contain;
-    border: 3px solid #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-/* --- NAVIGATION ARROWS --- */
-.prev-arrow, .next-arrow {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 20px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 50px;
-    transition: 0.3s ease;
-    text-decoration: none;
-    user-select: none;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    z-index: 10000; /* Ensures arrows stay above the image */
-}
-
-.prev-arrow { left: 20px; }
-.next-arrow { right: 20px; }
-
-.prev-arrow:hover, .next-arrow:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* --- CLOSE BUTTON --- */
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 60px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    z-index: 10001;
-}
-
-.close-btn:hover {
-    color: #bbb;
-}
-
-/* --- FOOTER --- */
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #333;
-    color: #ccc;
-    margin-top: 40px;
-    font-size: 0.9em;
-}
-
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media only screen and (max-width: 768px) {
-    .prev-arrow, .next-arrow {
-        font-size: 30px;
-        padding: 10px;
-    }
-    #lightbox-img {
-        max-width: 95%;
-    }
 }
