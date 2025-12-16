@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Gallery | Cooper, Winston & Indie</title>
-    
     <link rel="stylesheet" href="styles.css"> 
 </head>
 <body>
@@ -18,14 +17,13 @@
         </nav>
     </header>
 
-    <main>
+    <main class="container">
         <section class="gallery-intro">
             <h2>Our Cherished Memories</h2>
             <p>A collection of the moments that defined our time together. Click any photo to see a larger view.</p>
         </section>
 
         <section class="photo-grid-container"></section>
-        
     </main>
     
     <footer>
@@ -34,14 +32,11 @@
 
     <div id="lightbox" class="lightbox">
         <span class="close-btn">&times;</span>
-        
-        <a class="prev-arrow" onclick="changeImage(-1)">&#10094;</a>
-        <a class="next-arrow" onclick="changeImage(1)">&#10095;</a>
-        
+        <button class="nav-btn prev" onclick="changeImage(-1)">&#10094;</button>
+        <button class="nav-btn next" onclick="changeImage(1)">&#10095;</button>
         <img id="lightbox-img" src="" alt="Enlarged Photo">
     </div>
 
     <script src="scripts.js"></script> 
-
 </body>
 </html>
