@@ -24,23 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxImg = document.getElementById('lightbox-img');
 
     if (gridContainer && lightbox) {
-        console.log("Gallery container found. Attempting to load " + totalImages + " images...");
+        console.log("Gallery container found. Loading images...");
 
         for (let i = 1; i <= totalImages; i++) {
             const paddedIndex = String(i).padStart(3, '0');
             const img = document.createElement('img');
             
-            // --- CHANGE THIS LINE IF YOUR FILES DON'T HAVE THE DASH ---
-            // Example: images/photo001.jpg vs images/photo-001.jpg
+            // Adjust the path below if your filenames are different
             const imagePath = `images/photo-${paddedIndex}.jpg`; 
             
             img.src = imagePath; 
             img.classList.add('gallery-thumb');
             img.alt = `Gallery Photo ${i}`;
 
-            // Error log: If an image fails to load, it will tell you exactly which path failed
             img.onerror = function() {
-                console.error("FAILED TO LOAD IMAGE AT: " + this.src);
+                // If it fails, we see exactly why in the console (F12)
+                console.error("Failed to load: " + this.src);
             };
 
             img.addEventListener('click', function() {
@@ -52,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gridContainer.appendChild(img);
         }
 
+        // Arrow Navigation Function
         window.changeImage = function(n) {
             currentLightboxIndex += n;
             if (currentLightboxIndex > totalImages) currentLightboxIndex = 1;
@@ -66,8 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Close logic
         const closeBtn = document.querySelector('.close-btn');
-        if (closeBtn) closeBtn.onclick = () => lightbox.style.display = "none";
+        if (closeBtn) {
+            closeBtn.onclick = () => lightbox.style.display = "none";
+        }
         
         lightbox.onclick = (e) => {
             if (e.target === lightbox) lightbox.style.display = "none";
