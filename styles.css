@@ -118,142 +118,78 @@ footer {
     box-shadow: 0 0 10px rgba(168, 127, 94, 0.5);
 }
 
-/* --- LIGHTBOX (Modal/Pop-up) STYLES --- */
+/* --- LIGHTBOX OVERLAY --- */
 .lightbox {
     display: none; /* Hidden by default */
-    position: fixed; 
-    z-index: 10; 
-    padding-top: 50px; 
+    position: fixed;
+    z-index: 9999; /* Sits on top of everything */
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.9); /* Dark overlay */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Dark black background */
 }
 
-/* Modal Content (The enlarged image itself) */
-.lightbox-content {
+/* --- THE ENLARGED IMAGE --- */
+#lightbox-img {
+    display: block;
     margin: auto;
-    display: block;
-    width: 90%;
-    max-width: 900px;
-    max-height: 90vh; 
-    object-fit: contain; /* Ensures the large image fits entirely on screen */
+    margin-top: 5vh; /* 5% from the top */
+    max-width: 85%;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* The Close Button */
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: #a87f5e;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* --- GUEST BOOK FORM STYLES --- */
-
-.guestbook-section {
-    max-width: 700px; 
-    margin: 40px auto; 
-}
-
-.tribute-form {
-    padding: 25px;
-    border: 1px solid #e0d0c4; 
-    border-radius: 6px;
-    background-color: #fffaf5; 
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.tribute-form label {
-    display: block; 
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #6a5340;
-}
-
-.tribute-form input[type="text"],
-.tribute-form input[type="email"],
-.tribute-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-    font-size: 1em;
-    font-family: 'Georgia', serif;
-}
-
-.tribute-form textarea {
-    resize: vertical; 
-}
-
-.submit-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #a87f5e; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-    background-color: #6a5340; 
-}
-
-.note {
-    font-size: 0.9em;
-    color: #777;
-    margin-top: 15px;
-    text-align: center;
-}
-/* Arrow styling */
+/* --- NAVIGATION ARROWS --- */
 .prev-arrow, .next-arrow {
     cursor: pointer;
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 16px;
+    padding: 20px;
     margin-top: -50px;
     color: white;
     font-weight: bold;
     font-size: 50px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
+    transition: 0.3s ease;
     text-decoration: none;
-    z-index: 1001;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
 }
 
-.next-arrow {
-    right: 20px;
-    border-radius: 3px 0 0 3px;
-}
-
-.prev-arrow {
-    left: 20px;
-}
+.prev-arrow { left: 20px; }
+.next-arrow { right: 20px; }
 
 .prev-arrow:hover, .next-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- CLOSE BUTTON --- */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #bbb;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media only screen and (max-width: 768px) {
+    .prev-arrow, .next-arrow {
+        font-size: 30px;
+        padding: 10px;
+    }
+    #lightbox-img {
+        max-width: 95%;
+    }
 }
