@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentSlide = 0;
         let autoTimer;
 
-        // Create images 1, 2, and 3
         for (let i = 1; i <= 3; i++) {
             const img = document.createElement('img');
             img.src = `images/photo-${String(i).padStart(3, '0')}.jpg`;
@@ -19,14 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
             slides.push(img);
         }
 
-        // Add Arrows to Homepage if they don't exist
         slideshowContainer.innerHTML += `
             <button class="ss-nav-btn ss-prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="ss-nav-btn ss-next" onclick="moveSlide(1)">&#10095;</button>
         `;
 
         window.moveSlide = function(n) {
-            clearInterval(autoTimer); // Reset timer on click
+            if (slides.length === 0) return;
+            clearInterval(autoTimer);
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + n + slides.length) % slides.length;
             slides[currentSlide].classList.add('active');
@@ -68,11 +67,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLightbox() {
         if (lightboxImg) {
-            lightboxImg.src = `images/photo-${String(currentLightboxIndex).padStart(3, '0')}.jpg`;
+            const padded = String(currentLightboxIndex).padStart(3, '0');
+            lightboxImg.src = `images/photo-${padded}.jpg`;
         }
     }
 
     const closeBtn = document.querySelector('.close-btn');
     if (closeBtn) closeBtn.onclick = () => lightbox.style.display = "none";
     if (lightbox) lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = "none"; };
+
+    // --- PART 3: GUEST BOOK LOGIC ---
+    const guestForm = document.getElementById('guestbook-form');
+    const entriesContainer = document.getElementById('guestbook-entries');
+
+    if (guestForm && entriesContainer) {
+        guestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('guest-name').value;
+            const message = document.getElementById('guest-message').value;
+            const date = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
+
+            // 1. Create the visual entry on the page
+            const newEntry = document.createElement('div');
+            newEntry.classList.add('entry');
+            newEntry.innerHTML = `
+                <h4>${name}</h4>
+                <p>${message}</p>
+                <small>${date} (Pending Review)</small>
+            `;
+
+            // 2. Add it to the top of the list
+            entriesContainer.prepend(newEntry);
+
+            // 3. Clear the form
+            guestForm.reset();
+
+            // 4. Alert the user (Optional)
+            alert("Thank you for your message! It has been added to the session view.");
+        });
+    }
 });
