@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Book | Share Your Tribute</title>
+    
+    <link rel="stylesheet" href="styles.css"> 
+    </head>
+<body>
+    
+    <header>
+        <h1>Cooper, Winston & Indie</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Photo Gallery</a>
+            <a href="guestbook.html">Guest Book</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="guestbook-section">
+            <h2>Share a Memory or Leave a Note</h2>
+            <p>Your kind words and memories are deeply appreciated. Please use the form below to share a tribute, a favorite story, or simply a note for the family.</p>
+            
+            <form action="#" method="POST" class="tribute-form">
+                
+                <div class="form-group">
+                    <label for="name">Your Name (Required):</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email (Optional, kept private):</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Tribute / Message:</label>
+                    <textarea id="message" name="message" rows="8" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Submit Tribute</button>
+                
+                <p class="note">**Note:** This is a demonstration form. In a live website, submissions would be saved to a database.</p>
+            </form>
+        </section>
+        
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Forever In Our Hearts | Cooper, Winston & Indie</p>
+    </footer>
+
+</body>
+</html>
