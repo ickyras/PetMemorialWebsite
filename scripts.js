@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // --- CONFIGURATION ---
     // This MUST match the total number of images (photo-001.jpg up to photo-255.jpg)
-    const totalImages = 255; 
+    const totalImages = 254; 
     const intervalTime = 5000; // 5 seconds for rotation
 
     // --- FUNCTION 1: HOMEPAGE SLIDESHOW ROTATOR LOGIC ---
