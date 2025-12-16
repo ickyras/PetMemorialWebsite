@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let slides = []; 
         let currentSlide = 0;
 
+        function nextSlide() {
+        if (slides.length === 0) return;
+        
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
         for (let i = 1; i <= totalImages; i++) {
             const paddedIndex = String(i).padStart(3, '0'); 
             const img = document.createElement('img');
@@ -22,6 +30,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             slideshowContainer.appendChild(img);
             slides.push(img); 
         }
+
+        if (slides.length > 0) {
+        // CRUCIAL: Makes the first image visible
+        slides[currentSlide].classList.add('active'); 
+        
+        // CRUCIAL: Starts the timer
+        setInterval(nextSlide, intervalTime);
+    }
         
         // ... (rest of rotator logic)
     }
