@@ -43,45 +43,58 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     // --- FUNCTION 2: GALLERY GRID & LIGHTBOX LOGIC ---
+ document.addEventListener('DOMContentLoaded', (event) => {
+    const totalImages = 254; 
+    const intervalTime = 5000;
+    let currentLightboxIndex = 1; // Tracks which photo is open
+
+    // --- HOME PAGE ROTATOR ---
+    function initializeRotator() {
+        const slideshowContainer = document.getElementById('slideshow-container');
+        if (!slideshowContainer) return; 
+        // ... (your existing rotator code here)
+    }
+
+    // --- GALLERY & LIGHTBOX ---
     function initializeGallery() {
         const gridContainer = document.querySelector('.photo-grid-container');
         if (!gridContainer) return; 
 
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.close-btn');
 
-        // Loop to create all 255 thumbnails
         for (let i = 1; i <= totalImages; i++) {
             const paddedIndex = String(i).padStart(3, '0');
             const img = document.createElement('img');
-            
             img.src = `images/photo-${paddedIndex}.jpg`; 
-            
             img.classList.add('gallery-thumb');
-            img.alt = `Gallery Photo ${i}`;
             
-            // Attaches the click-to-enlarge function
             img.addEventListener('click', function() {
-                lightbox.style.display = "block"; 
-                lightboxImg.src = this.src; // Set the large image source
+                currentLightboxIndex = i;
+                updateLightboxImage();
+                lightbox.style.display = "block";
             });
-            
             gridContainer.appendChild(img);
         }
 
-        closeBtn.onclick = function() {
-            lightbox.style.display = "none";
+        // Global function to change images (needed for the arrows)
+        window.changeImage = function(n) {
+            currentLightboxIndex += n;
+            if (currentLightboxIndex > totalImages) currentLightboxIndex = 1;
+            if (currentLightboxIndex < 1) currentLightboxIndex = totalImages;
+            updateLightboxImage();
+        };
+
+        function updateLightboxImage() {
+            const padded = String(currentLightboxIndex).padStart(3, '0');
+            lightboxImg.src = `images/photo-${padded}.jpg`;
         }
 
-        window.onclick = function(event) {
-            if (event.target == lightbox) {
-                lightbox.style.display = "none";
-            }
-        }
+        // Close logic
+        document.querySelector('.close-btn').onclick = () => lightbox.style.display = "none";
+        lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = "none"; };
     }
 
-    // --- EXECUTION ---
     initializeRotator();
     initializeGallery();
 });
