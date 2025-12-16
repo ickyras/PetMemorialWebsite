@@ -74,37 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeBtn = document.querySelector('.close-btn');
     if (closeBtn) closeBtn.onclick = () => lightbox.style.display = "none";
-    if (lightbox) lightbox.onclick = (e) => { if (e.target === lightbox) lightbox.style.display = "none"; };
-
-    // --- PART 3: GUEST BOOK LOGIC ---
-    const guestForm = document.getElementById('guestbook-form');
-    const entriesContainer = document.getElementById('guestbook-entries');
-
-    if (guestForm && entriesContainer) {
-        guestForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('guest-name').value;
-            const message = document.getElementById('guest-message').value;
-            const date = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric', day: 'numeric' });
-
-            // 1. Create the visual entry on the page
-            const newEntry = document.createElement('div');
-            newEntry.classList.add('entry');
-            newEntry.innerHTML = `
-                <h4>${name}</h4>
-                <p>${message}</p>
-                <small>${date} (Pending Review)</small>
-            `;
-
-            // 2. Add it to the top of the list
-            entriesContainer.prepend(newEntry);
-
-            // 3. Clear the form
-            guestForm.reset();
-
-            // 4. Alert the user (Optional)
-            alert("Thank you for your message! It has been added to the session view.");
-        });
+    if (lightbox) {
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) lightbox.style.display = "none";
+        };
     }
 });
