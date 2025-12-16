@@ -1,68 +1,53 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-
-    // --- CONFIGURATION ---
+document.addEventListener('DOMContentLoaded', () => {
     const totalImages = 254; 
-    const intervalTime = 5000; 
-    let currentLightboxIndex = 1; 
+    const intervalTime = 5000;
+    let currentLightboxIndex = 1;
 
-    // --- FUNCTION 1: HOMEPAGE SLIDESHOW ROTATOR ---
-    function initializeRotator() {
-        const slideshowContainer = document.getElementById('slideshow-container');
-        if (!slideshowContainer) return; 
-
-        let slides = []; 
+    // --- 1. HOMEPAGE ROTATOR ---
+    const slideshowContainer = document.getElementById('slideshow-container');
+    if (slideshowContainer) {
+        console.log("Rotator initialized");
+        const slides = slideshowContainer.querySelectorAll('.slideshow-image');
         let currentSlide = 0;
 
-        function nextSlide() {
-            if (slides.length === 0) return;
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        for (let i = 1; i <= totalImages; i++) {
-            const paddedIndex = String(i).padStart(3, '0'); 
-            const img = document.createElement('img');
-            img.src = `images/photo-${paddedIndex}.jpg`; 
-            img.classList.add('slideshow-image');
-            img.alt = `Pet Photo ${i}`;
-            slideshowContainer.appendChild(img);
-            slides.push(img); 
-        }
-
         if (slides.length > 0) {
-            slides[currentSlide].classList.add('active'); 
-            setInterval(nextSlide, intervalTime);
+            slides[0].classList.add('active');
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, intervalTime);
         }
     }
 
-    // --- FUNCTION 2: GALLERY GRID & LIGHTBOX ---
-    function initializeGallery() {
-        const gridContainer = document.querySelector('.photo-grid-container');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.close-btn');
+    // --- 2. GALLERY GRID ---
+    const gridContainer = document.querySelector('.photo-grid-container');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-        // Stop if elements aren't found on the current page
-        if (!gridContainer || !lightbox || !lightboxImg) return; 
+    // Checkpoint: Is the gallery actually on this page?
+    if (gridContainer && lightbox) {
+        console.log("Gallery container found. Loading " + totalImages + " images...");
 
-        // Create the grid
         for (let i = 1; i <= totalImages; i++) {
             const paddedIndex = String(i).padStart(3, '0');
             const img = document.createElement('img');
+            
+            // Ensure this matches your file folder and naming exactly
             img.src = `images/photo-${paddedIndex}.jpg`; 
             img.classList.add('gallery-thumb');
             img.alt = `Gallery Photo ${i}`;
-            
+
             img.addEventListener('click', function() {
                 currentLightboxIndex = i;
                 updateLightboxImage();
-                lightbox.style.display = "block";
+                lightbox.style.display = "flex"; // Changed to flex to center content
             });
+
             gridContainer.appendChild(img);
         }
 
-        // Global function for arrows
+        // Global function for arrows (attached to window so HTML can see it)
         window.changeImage = function(n) {
             currentLightboxIndex += n;
             if (currentLightboxIndex > totalImages) currentLightboxIndex = 1;
@@ -72,20 +57,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         function updateLightboxImage() {
             const padded = String(currentLightboxIndex).padStart(3, '0');
-            lightboxImg.src = `images/photo-${padded}.jpg`;
+            if (lightboxImg) {
+                lightboxImg.src = `images/photo-${padded}.jpg`;
+            }
         }
 
         // Close logic
-        if (closeBtn) {
-            closeBtn.onclick = () => lightbox.style.display = "none";
-        }
+        const closeBtn = document.querySelector('.close-btn');
+        if (closeBtn) closeBtn.onclick = () => lightbox.style.display = "none";
         
-        lightbox.onclick = (e) => { 
-            if (e.target === lightbox) lightbox.style.display = "none"; 
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) lightbox.style.display = "none";
         };
+    } else {
+        console.log("Gallery elements not found on this page. Skipping gallery logic.");
     }
-
-    // --- EXECUTION ---
-    initializeRotator();
-    initializeGallery();
 });
