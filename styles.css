@@ -1,33 +1,120 @@
+/* --- GLOBAL STYLES & RESET --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f1ea; /* Light parchment background */
+    color: #333;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #6a5340;
+    color: white;
+    margin-bottom: 30px;
+}
+
 /* --- HOMEPAGE ROTATOR STYLES --- */
 #slideshow-container {
-    height: 500px; /* Adjust this to your preferred height */
-    position: relative; /* This is the "anchor" for the stacked photos */
+    width: 100%;
+    height: 500px;
+    position: relative;
     overflow: hidden;
     background-color: #6a5340; /* Memorial brown background */
     border-radius: 8px;
     margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .slideshow-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Shows the whole photo without cropping */
-    position: absolute; /* Stacks all photos on top of each other */
+    object-fit: contain; /* Keeps whole photo visible */
+    position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; /* Hide by default */
-    transition: opacity 1.5s ease-in-out; /* The fading effect */
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
 }
 
-/* This is what the JavaScript "turns on" to show a photo */
 .slideshow-image.active {
     opacity: 1;
+    z-index: 2;
 }
 
-/* Grid layout for the Gallery (re-confirming this is here) */
+/* --- GALLERY GRID STYLES --- */
 .photo-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px; 
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 20px 0;
 }
+
+.gallery-thumb {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Crops to square for a clean grid look */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery-thumb:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* --- LIGHTBOX STYLES --- */
+#lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    border: 3px solid white;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.nav-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.nav-btn:hover { background: rgba(255,255,255,0.4); }
