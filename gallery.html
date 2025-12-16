@@ -6,8 +6,6 @@
     <title>Photo Gallery | Cooper, Winston & Indie</title>
     
     <link rel="stylesheet" href="styles.css"> 
-    
-    <script src="scripts.js"></script> 
 </head>
 <body>
     
@@ -26,13 +24,7 @@
             <p>A collection of the moments that defined our time together. Click any photo to see a larger view.</p>
         </section>
 
-        <section class="photo-grid-container">
-            </section>
-        
-        <div id="lightbox" class="lightbox">
-            <span class="close-btn">&times;</span>
-            <img class="lightbox-content" id="lightbox-img">
-        </div>
+        <section class="photo-grid-container"></section>
         
     </main>
     
@@ -41,13 +33,15 @@
     </footer>
 
     <div id="lightbox" class="lightbox">
-    <span class="close-btn">&times;</span>
-    
-    <a class="prev-arrow" onclick="changeImage(-1)">&#10094;</a>
-    <a class="next-arrow" onclick="changeImage(1)">&#10095;</a>
-    
-    <img id="lightbox-img" src="" alt="Enlarged Photo">
-</div>
+        <span class="close-btn">&times;</span>
+        
+        <a class="prev-arrow" onclick="changeImage(-1)">&#10094;</a>
+        <a class="next-arrow" onclick="changeImage(1)">&#10095;</a>
+        
+        <img id="lightbox-img" src="" alt="Enlarged Photo">
+    </div>
+
+    <script src="scripts.js"></script> 
 
 </body>
 </html>

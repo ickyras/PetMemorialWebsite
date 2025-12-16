@@ -36,6 +36,10 @@ header h1 {
     font-weight: 300;
 }
 
+nav {
+    margin-top: 10px;
+}
+
 nav a {
     color: white;
     text-decoration: none;
@@ -52,7 +56,7 @@ nav a:hover {
 
 /* --- HOMEPAGE SLIDESHOW STYLES --- */
 #slideshow-container {
-    height: 400px; /* Fixed height for the banner area */
+    height: 400px;
     position: relative;
     overflow: hidden;
     margin-bottom: 20px;
@@ -61,39 +65,25 @@ nav a:hover {
 .slideshow-image {
     width: 100%;
     height: 100%;
-    /* FIX: This ensures the WHOLE image is visible, showing the background color in empty space */
     object-fit: contain; 
     position: absolute;
     opacity: 0;
     transition: opacity 1.5s ease-in-out;
-    background-color: #6a5340; /* Fills the container space */
+    background-color: #6a5340;
 }
 
 .slideshow-image.active {
     opacity: 1;
 }
 
-/* --- FOOTER --- */
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #333;
-    color: #ccc;
-    margin-top: 40px;
-    font-size: 0.9em;
-}
-
 /* --- GALLERY PAGE STYLES --- */
-
 .gallery-intro {
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* Grid layout for the photos */
 .photo-grid-container {
     display: grid;
-    /* Responsive grid with columns between 150px and 1 fraction unit wide */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px; 
     padding: 20px;
@@ -104,10 +94,9 @@ footer {
 
 .gallery-thumb {
     width: 100%;
-    height: 150px; /* Fixed height for uniformity */
-    /* FIX: Ensures the WHOLE image is visible within the thumbnail space */
+    height: 150px;
     object-fit: contain; 
-    background-color: #f0f0f0; /* Fills empty space if aspect ratio is off */
+    background-color: #f0f0f0;
     cursor: pointer; 
     border-radius: 4px;
     transition: transform 0.3s;
@@ -120,21 +109,23 @@ footer {
 
 /* --- LIGHTBOX OVERLAY --- */
 .lightbox {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
-    z-index: 9999; /* Sits on top of everything */
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Dark black background */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Centers the content */
+    align-items: center;
+    justify-content: center;
 }
 
-/* --- THE ENLARGED IMAGE --- */
 #lightbox-img {
     display: block;
     margin: auto;
-    margin-top: 5vh; /* 5% from the top */
+    margin-top: 5vh;
     max-width: 85%;
     max-height: 85vh;
     object-fit: contain;
@@ -158,6 +149,7 @@ footer {
     user-select: none;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+    z-index: 10000; /* Ensures arrows stay above the image */
 }
 
 .prev-arrow { left: 20px; }
@@ -177,10 +169,21 @@ footer {
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    z-index: 10001;
 }
 
 .close-btn:hover {
     color: #bbb;
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: #ccc;
+    margin-top: 40px;
+    font-size: 0.9em;
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
