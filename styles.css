@@ -1,11 +1,11 @@
-/* --- GLOBAL STYLES & RESET --- */
+/* --- GLOBAL THEME: PURPLES & LILACS --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f1ea; /* Light parchment background */
-    color: #333;
+    background-color: #f8f4f9; /* Very faint lilac tint */
+    color: #4a3b4e; /* Deep purple-grey text */
 }
 
 .container {
@@ -16,28 +16,34 @@ body {
 
 header {
     text-align: center;
-    padding: 40px 0;
-    background-color: #6a5340;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #8e7dbe, #b39cd0); /* Lilac gradient */
     color: white;
     margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* --- HOMEPAGE ROTATOR STYLES --- */
+h1, h2, h3 {
+    color: #6d597a; /* Muted purple */
+}
+
+/* --- HOMEPAGE ROTATOR --- */
 #slideshow-container {
     width: 100%;
     height: 500px;
     position: relative;
     overflow: hidden;
-    background-color: #6a5340; /* Memorial brown background */
-    border-radius: 8px;
+    background-color: #dcd6f7; /* Light lavender placeholder */
+    border-radius: 12px;
     margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border: 4px solid #ffffff;
 }
 
 .slideshow-image {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Keeps whole photo visible */
+    object-fit: contain;
     position: absolute;
     top: 0;
     left: 0;
@@ -51,70 +57,89 @@ header {
     z-index: 2;
 }
 
-/* --- GALLERY GRID STYLES --- */
+/* --- GALLERY GRID --- */
 .photo-grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
     padding: 20px 0;
 }
 
 .gallery-thumb {
     width: 100%;
-    height: 200px;
-    object-fit: cover; /* Crops to square for a clean grid look */
-    border-radius: 4px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, border-color 0.3s;
 }
 
 .gallery-thumb:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+    border-color: #b39cd0; /* Lilac highlight */
 }
 
-/* --- LIGHTBOX STYLES --- */
+/* --- LIGHTBOX (Viewing large photos) --- */
 #lightbox {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(46, 35, 54, 0.95); /* Deep purple transparent overlay */
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
 #lightbox-img {
     max-width: 90%;
     max-height: 80%;
-    border: 3px solid white;
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
 .close-btn {
     position: absolute;
     top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 40px;
+    right: 40px;
+    color: #ffffff;
+    font-size: 50px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .nav-btn {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.15);
     color: white;
-    padding: 15px;
+    padding: 20px;
     border: none;
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 24px;
+    border-radius: 50%;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev { left: 20px; }
+.next { right: 20px; }
 
-.nav-btn:hover { background: rgba(255,255,255,0.4); }
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- NAVIGATION LINKS (If you have any) --- */
+nav a {
+    color: #6d597a;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b39cd0;
+}
