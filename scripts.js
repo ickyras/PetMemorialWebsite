@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const totalImages = 254; 
-    const intervalTime = 5000;
     
-    // --- PART 1: HOMEPAGE SLIDESHOW ---
+    // --- PART 1: MAIN PAGE SLIDESHOW (4-Second Scroll) ---
     const slideshowContainer = document.getElementById('slideshow-container');
     if (slideshowContainer) {
         let slides = [];
         let currentSlide = 0;
-        let autoTimer;
 
+        // Creating the 3 images for the homepage
         for (let i = 1; i <= 3; i++) {
             const img = document.createElement('img');
             img.src = `images/photo-${String(i).padStart(3, '0')}.jpg`;
@@ -18,27 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
             slides.push(img);
         }
 
-        slideshowContainer.innerHTML += `
-            <button class="ss-nav-btn ss-prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="ss-nav-btn ss-next" onclick="moveSlide(1)">&#10095;</button>
-        `;
-
-        window.moveSlide = function(n) {
-            if (slides.length === 0) return;
-            clearInterval(autoTimer);
+        // Auto-scroll logic (every 4000ms = 4 seconds)
+        setInterval(() => {
             slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + n + slides.length) % slides.length;
+            currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-            startAuto();
-        };
-
-        function startAuto() {
-            autoTimer = setInterval(() => moveSlide(1), intervalTime);
-        }
-        startAuto();
+        }, 4000); 
     }
 
-    // --- PART 2: GALLERY GRID & LIGHTBOX ---
+    // --- PART 2: GALLERY LIGHTBOX ARROWS ---
     const gridContainer = document.querySelector('.photo-grid-container');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -58,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // This function is ONLY called by the buttons in the gallery lightbox
     window.changeImage = function(n) {
         currentLightboxIndex += n;
         if (currentLightboxIndex > totalImages) currentLightboxIndex = 1;
@@ -74,9 +62,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const closeBtn = document.querySelector('.close-btn');
     if (closeBtn) closeBtn.onclick = () => lightbox.style.display = "none";
-    if (lightbox) {
-        lightbox.onclick = (e) => {
-            if (e.target === lightbox) lightbox.style.display = "none";
-        };
-    }
 });
